@@ -17,13 +17,14 @@ import torch
 
 from sys import argv
 
-from vllm import LLM
+from vllm import LLM, SamplingParams
 
 logging.basicConfig(filename='log', filemode='w', level=logging.DEBUG)
 
 server = LanguageServer("example-server", "v0.1")
 
-llm = LLM(model="codellama/CodeLlama-7b-hf", dtype='float16')
+llm = LLM(model="TheBloke/CodeLlama-7B-Instruct-GPTQ")
+print("Model Loaded")
 llm_params = SamplingParams(temperature=0.3, top_p=0.95)
 
 @server.feature(TEXT_DOCUMENT_COMPLETION)
